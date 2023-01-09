@@ -117,6 +117,23 @@ This template defines the structure of the report, with placeholders for the dat
 
 
 
+Here's a SPARQL query that you can use to find the concept scheme and the named graph it is in:
+
+```
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?concept_scheme ?graph
+WHERE {
+  GRAPH ?graph {
+    ?concept_scheme a skos:ConceptScheme .
+  }
+}
+
+```
+
+This query retrieves the concept schemes and the named graphs they are in by using the GRAPH keyword to specify that the ?concept_scheme must be in the named graph ?graph.
+
 
 
 
