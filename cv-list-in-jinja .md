@@ -135,6 +135,32 @@ WHERE {
 This query retrieves the concept schemes and the named graphs they are in by using the GRAPH keyword to specify that the ?concept_scheme must be in the named graph ?graph.
 
 
+To query for a subject which is a member of class skos:ConceptScheme or <http://www.w3.org/2004/02/skos/core#ConceptScheme> or both, and show which named graph the subject is in, you can use the VALUES keyword and the UNION operator, as well as the GRAPH keyword.
+
+Here's an example of a SPARQL query that retrieves subjects that are members of either class skos:ConceptScheme or <http://www.w3.org/2004/02/skos/core#ConceptScheme>, and shows the named graph they are in:
+
+```
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?subject ?graph
+WHERE {
+  GRAPH ?graph {
+    {
+      VALUES ?class { skos:ConceptScheme <http://www.w3.org/2004/02/skos/core#ConceptScheme> }
+      ?subject a ?class .
+    }
+    UNION
+    {
+      ?subject a skos:ConceptScheme .
+      ?subject a <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
+    }
+  }
+}
+
+```
+
+This query uses the GRAPH keyword to specify that the subject must be in the named graph ?graph. It then uses the VALUES keyword and the UNION operator to combine the results of two subqueries, as described in my previous response.
+
 
 
 
