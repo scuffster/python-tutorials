@@ -215,6 +215,43 @@ This way the user will not be able to edit the content of the textarea, but it w
 
 I hope this helps! let me know if you have any questions.
 
+my data looks like this [{'status'}, {'title'}, {'graph'}, {'title': 'UNESCO Thesaurus', 'graph': <https://vocab.myco.net/rd/data/rtsm-picklist/>, 'status': 'RED'}, {'title': 'Tesauro de la UNESCO', 'graph': <https://vocab.myco.net/rd/data/evidence-connect-picklist/>, 'status': 'RED'}] how would I pass this to the jinja template from my flask app and display this in the text area in my jinja template
 
+
+The data you provided is a list of dictionaries, where each dictionary only contains one key-value pair. To display this data in a text area using Jinja templates in a Python Flask app, you can use the for loop and the textarea HTML element.
+
+In your Flask app, you can pass the list of dictionaries to the Jinja template by using the render_template() function and passing the list as a keyword argument.
+
+Then, in the Jinja template, you can use the for loop to iterate over the list of dictionaries, and for each dictionary you can print the key, value pairs.
+
+Here's an example of how you can do this:
+
+Copy code
+```
+<!-- Jinja template -->
+
+<textarea id="myTextArea" rows="10" cols="50" style="overflow:scroll;" readonly>
+  {% for dictionary in dictionaries %}
+    {% for key, value in dictionary.items() %}
+        {{ key }}: {{ value }}
+        <br>
+    {% endfor %}
+    <br>
+  {% endfor %}
+</textarea>
+```
+In the above example, the inner for-loop goes through each dictionary in dictionaries and access key-value pair using .items() method and then prints key:value and line break. The outer loop is just to separate each dictionary with a line break.
+
+Also, you should make sure you are passing the list of dictionaries to the template when you render it:
+
+```
+return render_template("your_template.html", dictionaries=dictionaries)
+
+```
+
+
+This will display the contents of each dictionary in the list in a text area, with the key-value pairs separated by line breaks.
+
+Please let me know if you have any questions or if there's anything else I can help with!
 
 
