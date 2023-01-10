@@ -162,7 +162,58 @@ WHERE {
 This query uses the GRAPH keyword to specify that the subject must be in the named graph ?graph. It then uses the VALUES keyword and the UNION operator to combine the results of two subqueries, as described in my previous response.
 
 
+If you want to display the text area with the table only and not allow the user to edit its content, you can set the readonly attribute of the textarea element to true.
 
+```
+<textarea id="myTextArea" rows="10" cols="50" style="overflow:scroll;" readonly>
+  <table>
+    <tr>
+        {% for index in dictionaries[0] %}
+        <th>{{ index }}</th>
+        {% endfor %}
+    </tr>
+    {% for dictionary in dictionaries %}
+    <tr>
+        {% for value in dictionary.values() %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</textarea>
+```
+
+
+or you can use javascript to make the textarea readonly after the page is loaded:
+
+```
+<textarea id="myTextArea" rows="10" cols="50" style="overflow:scroll;"></textarea>
+
+<script>
+  document.getElementById("myTextArea").innerHTML = `
+    <table>
+      <tr>
+        {% for index in dictionaries[0] %}
+          <th>{{ index }}</th>
+        {% endfor %}
+      </tr>
+      {% for dictionary in dictionaries %}
+        <tr>
+          {% for value in dictionary.values() %}
+            <td>{{ value }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  `;
+  document.getElementById("myTextArea").readOnly = true;
+</script>
+```
+
+
+This way the user will not be able to edit the content of the textarea, but it will be displayed correctly.
+
+I hope this helps! let me know if you have any questions.
 
 
 
