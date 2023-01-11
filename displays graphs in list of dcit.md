@@ -331,3 +331,37 @@ This should give the same output as previous code snippet.
 
 Note that you can adjust the size, color, and other properties of the status icon by modifying the CSS.
 
+
+how would I add the sidebar to the base.html jinja template so that it can be extended in all my templates
+You can add the code for the sidebar to your base.html Jinja template by creating a block named sidebar and placing the sidebar code inside this block. This way, you can extend the base.html template in all your other templates and use the {% block sidebar %} tags to define the sidebar's content in each template.
+
+Here's an example of how you could add the sidebar to the base.html template:
+
+Copy code
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            {% block sidebar %}
+            <h2>Sidebar</h2>
+            <p>Sidebar content goes here.</p>
+            {% endblock %}
+        </div>
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>
+```
+In this example, the {% block sidebar %} template tags are used to define the area of the base.html template where the sidebar's content should be placed.
+
+In the child template, you can inherit the base template using {% extends 'base.html' %} and then override the sidebar block by using the same {% block sidebar %}
+
+
