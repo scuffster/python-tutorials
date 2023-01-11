@@ -261,5 +261,73 @@ Copy code
 Keep in mind that the exact layout and appearance of the sidebar will depend on the size of the viewport and screen resolution, so it's a good practice to test your website on different screen sizes and devices to ensure that it looks the way you want it to.
 
 
+how would I conditionally show a coloured status icon in the cell of the table depending on the value of item.status?
+You can use Jinja template's control structures like if-else to conditionally show a colored status icon in the cell of the table depending on the value of item.status.
 
+Here's an example of how you could do this:
+
+In your Jinja template:
+
+Copy code
+```
+<table>
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Graphuri</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in vocabs %}
+            <tr>
+                <td>
+                    {% if item.status == "RED" %}
+                        <span class="red-status"></span>
+                    {% endif %}
+                    {% if item.status == "GREEN" %}
+                        <span class="green-status"></span>
+                    {% endif %}
+                </td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.graphuri }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+```
+In your CSS file:
+
+Copy code
+```
+.red-status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.green-status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+}
+```
+In this example, the Jinja template uses the if and else statements to conditionally display a <span> element with a class of red-status or green-status depending on the value of item.status. The corresponding CSS styles will be applied to the span element, and it will be displayed as a small colored circle.
+You can add any other css properties as per your need to make it look better.
+
+Alternatively you could use the ternary operator(? :) in the Jinja template:
+
+Copy code
+```
+<td>
+    <span class="{{ item.status == 'RED' ? 'red-status': (item.status == 'GREEN' ? 'green-status':'') }}"></span>
+</td>
+```
+This should give the same output as previous code snippet.
+
+Note that you can adjust the size, color, and other properties of the status icon by modifying the CSS.
 
