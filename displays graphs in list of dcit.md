@@ -57,3 +57,45 @@ Copy code
 </table>
 ```
 This will display the data in a table format with three columns: "Status", "title", and "graphuri", and the rows corresponding to the dictionaries in your list.
+
+
+
+
+You can use the CSS property "overflow" to create a scrollable area for the table in your Jinja template. Here is an example of how you could do this:
+
+In your Jinja template:
+
+Copy code
+```
+<div style="overflow: auto; max-height: 400px;">
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Title</th>
+                <th>Graphuri</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in vocabs %}
+                <tr>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.graphuri }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+```
+I wrapped the table element in a div element and set the CSS overflow property to "auto" to create a scrollable area. I also set a max-height of 400px to limit the height of the scrollable area to 400 pixels. With this in place the table will overflow if there more than 20 rows.
+You can adjust the height to match your requirement.
+
+Alternatively, you could define a CSS class to handle this behavior and apply it to the div container, so you can easily reuse the class later on other parts of the website and maintain a consistent look.
+
+
+
+
+
+
+
