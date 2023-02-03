@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Validate URL</title>
+  </head>
+  <body>
+    <h1>Validate URL</h1>
+    <form method="post">
+      <input type="text" name="void_uri_space" placeholder="Enter URL">
+      <input type="submit" value="Submit">
+    </form>
+    {% if result %}
+      <p>Result: {{ result }}</p>
+    {% endif %}
+  </body>
+</html>
